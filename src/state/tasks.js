@@ -1,4 +1,4 @@
-import {database} from './firebase'
+import {database} from './../firebase'
 
 const SET_TASKS = 'tasks/SET_TASKS'
 
@@ -10,7 +10,7 @@ export const init = () => dispatch => {
     )
 }
 
-export const addNewTasks = (newTaskData) => (dispatch, getState) => {
+export const addNewTask = (newTaskData) => (dispatch, getState) => {
     const nextIndex = getState().tasks.tasksList.length || 0
     database().ref(`taskNames/${nextIndex}`).set({
         ...newTaskData,
