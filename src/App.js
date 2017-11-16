@@ -1,19 +1,45 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+} from 'react-router-dom'
+import {
+    Grid,
+    Button
+} from 'react-bootstrap'
+
 import './App.css';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Router>
+          <Grid>
+              <div style={{
+                  border: "1px solid lightgrey",
+                  borderRadius: 10,
+                  padding: 15,
+                  boxShadow: "0px 0px 20px lightgrey"
+              }}>
+                  <h3 style={{color: "grey"}}> - = ToDo Organiser = -</h3>
+              </div>
+              <div style={{
+                  border: "1px solid lightgrey",
+                  borderRadius: 10,
+                  padding: 15,
+                  boxShadow: "0px 0px 20px lightgrey",
+                  height: 150
+              }}></div>
+              <div style={{
+                  border: "1px solid lightgrey",
+                  borderRadius: 10,
+                  padding: 5,
+                  boxShadow: "0px 0px 20px lightgrey"
+              }}>
+                  <h5 style={{color: "grey", textAlign: "center"}}> - = by Łukasz Abramczuk = -</h5>
+              </div>
+          </Grid>
+      </Router>
     );
   }
 }
