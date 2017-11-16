@@ -11,6 +11,9 @@ import {
 } from 'react-bootstrap'
 
 import {database} from './firebase'
+import {connect} from 'react-redux'
+
+import {addNewTask} from './state/tasks'
 
 import './App.css';
 
@@ -21,13 +24,46 @@ class App extends React.Component {
         super();
 
         this.state = {
+            id: '',
             taskName: '',
-            email: '',
-            gender: '',
-            city: ''
+            taskAddData: '',
+            taskStatus: '',
+            taskDesc: ''
         }
     }
 
+    handleTaskNameInputChange = (event) => {
+        this.setState({
+            taskName: event.target.value
+        });
+    }
+
+    handleTaskDescInputChange = (event) => {
+        this.setState({
+            taskDesc: event.target.value
+        });
+    }
+
+    handleAddTask = (event) => {
+        this.setState({
+            addTask: event.target.value
+        });
+    }
+
+    handleAddTask = (event) => {
+        event.preventDefault();
+
+        let newTaskData = {
+            id: Date.now(),
+            taskName: this.state.taskName,
+            taskDesc: this.state.taskDesc,
+            taskAddData: this.state.taskAddData,
+            taskStatus: this.state.status
+        };
+
+        this.props.addNewTask(newTaskData)
+
+    }
 
     render() {
         return (
@@ -58,13 +94,13 @@ class App extends React.Component {
                             <form>
                                 <FormGroup>
                                     <FormControl type="text" placeholder="Nazwa zadania..." value={this.state.taskName}
-                                                 onChange={this.handleNameInputChange}/>
+                                                 onChange={this.handleTaskNameInputChange}/>
                                 </FormGroup>
                                 <FormGroup>
-                                    <FormControl type="text" placeholder="Opis zadania..." value={this.state.taskName}
-                                                 onChange={this.handleNameInputChange}/>
+                                    <FormControl type="text" placeholder="Opis zadania..." value={this.state.taskDesc}
+                                                 onChange={this.handleTaskDescInputChange}/>
                                 </FormGroup>
-                                <Button>Dodaj zadanie</Button>
+                                <Button bsStyle="primary" onClick={this.handleAddTask}>Dodaj zadanie</Button>
                             </form>
 
                         </div>
@@ -83,4 +119,11 @@ class App extends React.Component {
     }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+    addNewTask: newTaskData => dispatch(addNewTask(newTaskData))
+})
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(App)
