@@ -1,16 +1,17 @@
 import React from 'react'
 import {
     BrowserRouter as Router,
-    Route,
+
 } from 'react-router-dom'
 import {
     Grid,
     Button,
     FormGroup,
-    FormControl
+    FormControl,
+    Table
 } from 'react-bootstrap'
 
-import {database} from './firebase'
+// import {database} from './firebase'
 import {connect} from 'react-redux'
 
 import {addNewTask} from './state/tasks'
@@ -27,7 +28,7 @@ class App extends React.Component {
             id: '',
             taskName: '',
             taskAddData: '',
-            taskStatus: '',
+            taskStatus: '0',
             taskDesc: ''
         }
     }
@@ -57,8 +58,7 @@ class App extends React.Component {
             id: Date.now(),
             taskName: this.state.taskName,
             taskDesc: this.state.taskDesc,
-            taskAddData: this.state.taskAddData,
-            taskStatus: this.state.status
+            taskStatus: this.state.taskStatus
         };
 
         this.props.addNewTask(newTaskData)
@@ -102,6 +102,56 @@ class App extends React.Component {
                                 </FormGroup>
                                 <Button bsStyle="primary" onClick={this.handleAddTask}>Dodaj zadanie</Button>
                             </form>
+                        </div>
+                        <br/>
+                        <h4>Lista zadań</h4>
+                        <div style={{
+                            border: "1px solid white",
+                            borderRadius: 10,
+                            padding: 15
+                        }}>
+
+                            {
+                                this.props.tasks !== null ?
+                                    <Table striped bordered condensed hover style={{
+                                        marginTop: 20, color: "black"
+                                    }}>
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nazwa</th>
+                                            <th>Opis</th>
+                                            <th>Status</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {
+                                            this.props.tasks.map(
+                                                ({id, taskName, taskDesc, taskStatus}, index) => (
+                                                    <tr key={id}>
+                                                        <td>
+                                                            {id}
+                                                        </td>
+                                                        <td>
+                                                            {taskName}
+                                                        </td>
+                                                        <td>
+                                                            {taskDesc}
+                                                        </td>
+                                                        <td>
+                                                            {taskStatus}
+                                                        </td>
+
+                                                    </tr>
+                                                )
+                                            )
+                                        }
+                                        </tbody>
+
+                                    </Table> :
+                                    <p>Wczytywanie bazy...</p>
+                            }
 
                         </div>
                     </div>
@@ -123,7 +173,11 @@ const mapDispatchToProps = dispatch => ({
     addNewTask: newTaskData => dispatch(addNewTask(newTaskData))
 })
 
+const mapStateToProps = state => ({
+    tasks: state.tasks.tasksList
+})
+
 export default connect(
-    null,
-    mapDispatchToProps
+    mapDispatchToProps,
+    mapStateToProps
 )(App)
