@@ -14,7 +14,7 @@ import {
 
 import {connect} from 'react-redux'
 
-import {addNewTask} from './state/tasks'
+import {addNewTask, deleteTask} from './state/tasks'
 
 import './App.css';
 
@@ -118,6 +118,7 @@ class App extends React.Component {
                                             <th>Opis</th>
                                             <th>Status</th>
                                             <th>Data dodania</th>
+                                            <th>Akcja</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -139,6 +140,8 @@ class App extends React.Component {
                                                         </td>
                                                         <td>
                                                             {taskDate}
+                                                        </td>
+                                                        <td><Button onClick={()=>this.props.deleteTask(id)} bsStyle="danger"> Usuń</Button>
                                                         </td>
 
                                                     </tr>
@@ -168,7 +171,8 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addNewTask: newTaskData => dispatch(addNewTask(newTaskData))
+    addNewTask: newTaskData => dispatch(addNewTask(newTaskData)),
+    deleteTask: (id) => dispatch(deleteTask(id))
 })
 
 const mapStateToProps = state => ({

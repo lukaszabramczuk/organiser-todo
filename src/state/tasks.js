@@ -19,6 +19,14 @@ export const addNewTask = (newTaskData) => (dispatch, getState) => {
         alert('Dodano zadanie!')})
 }
 
+export const deleteTask = (id) => (dispatch, getState) => {
+    database().ref(`taskNames/${id}`).set(null)
+        .then(() => {
+            alert('Usunięto zadanie!')
+        })
+}
+
+
 const setTasks = tasks => ({
     type: SET_TASKS,
     tasks: tasks
