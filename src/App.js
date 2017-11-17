@@ -11,7 +11,7 @@ import {
     Table
 } from 'react-bootstrap'
 
-// import {database} from './firebase'
+
 import {connect} from 'react-redux'
 
 import {addNewTask} from './state/tasks'
@@ -45,11 +45,11 @@ class App extends React.Component {
         });
     }
 
-    handleAddTask = (event) => {
-        this.setState({
-            addTask: event.target.value
-        });
-    }
+    // handleAddTask = (event) => {
+    //     this.setState({
+    //         addTask: event.target.value
+    //     });
+    // }
 
     handleAddTask = (event) => {
         event.preventDefault();
@@ -178,6 +178,6 @@ const mapStateToProps = state => ({
 })
 
 export default connect(
-    mapDispatchToProps,
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(App)
