@@ -45,17 +45,12 @@ class App extends React.Component {
         });
     }
 
-    // handleAddTask = (event) => {
-    //     this.setState({
-    //         addTask: event.target.value
-    //     });
-    // }
 
     handleAddTask = (event) => {
         event.preventDefault();
 
         let newTaskData = {
-            id: Date.now(),
+            taskDate: Date().slice(0,21),
             taskName: this.state.taskName,
             taskDesc: this.state.taskDesc,
             taskStatus: this.state.taskStatus
@@ -122,13 +117,13 @@ class App extends React.Component {
                                             <th>Nazwa</th>
                                             <th>Opis</th>
                                             <th>Status</th>
-
+                                            <th>Data dodania</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {
                                             this.props.tasks.map(
-                                                ({id, taskName, taskDesc, taskStatus}, index) => (
+                                                ({id, taskDate, taskName, taskDesc, taskStatus}, index) => (
                                                     <tr key={id}>
                                                         <td>
                                                             {id}
@@ -141,6 +136,9 @@ class App extends React.Component {
                                                         </td>
                                                         <td>
                                                             {taskStatus}
+                                                        </td>
+                                                        <td>
+                                                            {taskDate}
                                                         </td>
 
                                                     </tr>
