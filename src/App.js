@@ -29,7 +29,8 @@ class App extends React.Component {
             taskName: '',
             taskAddData: '',
             taskStatus: '',
-            taskDesc: ''
+            taskDesc: '',
+            checkbox: false
         }
     }
 
@@ -45,6 +46,12 @@ class App extends React.Component {
         });
     }
 
+    handleCheckboxOn = (event) => {
+        console.log(event);
+        this.setState({
+            checkbox: event.target.value
+        });
+    }
 
     handleAddTask = (event) => {
         event.preventDefault();
@@ -151,7 +158,7 @@ class App extends React.Component {
                                                         <td><Button onClick={()=>this.props.deleteTask(id)} bsStyle="danger"> Usuń</Button>
                                                         </td>
                                                         <td style={{textAlign: "center"}}>
-                                                            <input type="checkbox"></input>
+                                                            <input onChange={this.handleCheckboxOn} type="checkbox"></input>
                                                         </td>
 
                                                     </tr>
