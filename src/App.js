@@ -28,7 +28,7 @@ class App extends React.Component {
             id: '',
             taskName: '',
             taskAddData: '',
-            taskStatus: '0',
+            taskStatus: '',
             taskDesc: ''
         }
     }
@@ -99,6 +99,11 @@ class App extends React.Component {
                             </form>
                         </div>
                         <br/>
+                        <div style={{textAlign: "right"}}>
+                            <Button>Zaznacz wszystkie</Button>
+                            <Button>Usuń zaznaczone</Button>
+                        </div>
+                        <br/>
                         <h4>Lista zadań</h4>
                         <div style={{
                             border: "1px solid white",
@@ -119,6 +124,8 @@ class App extends React.Component {
                                             <th>Status</th>
                                             <th>Data dodania</th>
                                             <th>Akcja</th>
+                                            <th>Zaznacz</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -142,6 +149,9 @@ class App extends React.Component {
                                                             {taskDate}
                                                         </td>
                                                         <td><Button onClick={()=>this.props.deleteTask(id)} bsStyle="danger"> Usuń</Button>
+                                                        </td>
+                                                        <td style={{textAlign: "center"}}>
+                                                            <input type="checkbox"></input>
                                                         </td>
 
                                                     </tr>
