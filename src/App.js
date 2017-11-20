@@ -29,7 +29,7 @@ class App extends React.Component {
             id: '',
             taskName: '',
             taskAddData: '',
-            taskStatus: '0',
+            taskStatus: '',
             taskDesc: '',
             toRemove: []
         }
@@ -120,7 +120,7 @@ class App extends React.Component {
                         </div>
                         <br/>
                         <div style={{textAlign: "right"}}>
-                            <Button>Zaznacz wszystkie</Button>
+                            {/*<Button>Zaznacz wszystkie</Button>*/}
                             <Button onClick={this.removeAll}>Usuń zaznaczone</Button>
                         </div>
                         <br/>
@@ -150,7 +150,7 @@ class App extends React.Component {
                                         </thead>
                                         <tbody>
                                         {
-                                            this.props.tasks && this.props.tasks.map(
+                                            this.props.tasks.map(
                                                 ({id, taskDate, taskName, taskDesc, taskStatus}, index) => (
                                                     <tr key={id}>
                                                         <td>
