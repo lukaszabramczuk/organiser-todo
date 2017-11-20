@@ -13,6 +13,7 @@ import {
 
 
 import {connect} from 'react-redux'
+import {database} from "./firebase";
 
 import {addNewTask, deleteTask} from './state/tasks'
 
@@ -28,9 +29,9 @@ class App extends React.Component {
             id: '',
             taskName: '',
             taskAddData: '',
-            taskStatus: '',
+            taskStatus: '0',
             taskDesc: '',
-            checkbox: false
+            toRemove: []
         }
     }
 
@@ -46,18 +47,25 @@ class App extends React.Component {
         });
     }
 
-    handleCheckboxOn = (event) => {
-        console.log(event);
-        this.setState({
-            checkbox: event.target.value
-        });
+
+    handleCheckboxOn = (id) => {
+        if (this.state.toRemove.includes(id)) {
+            this.setState({
+                toRemove: this.state.toRemove.filter(taskId => id !== taskId)
+            });
+        }
+        else {
+            this.setState({
+                toRemove: this.state.toRemove.concat(id)
+            });
+        }
     }
 
     handleAddTask = (event) => {
         event.preventDefault();
 
         let newTaskData = {
-            taskDate: Date().slice(0,21),
+            taskDate: Date().slice(0, 21),
             taskName: this.state.taskName,
             taskDesc: this.state.taskDesc,
             taskStatus: this.state.taskStatus
@@ -65,6 +73,11 @@ class App extends React.Component {
 
         this.props.addNewTask(newTaskData)
 
+    }
+
+    removeAll = (event) => {
+        event.preventDefault();
+        this.state.toRemove.forEach((id) => database().ref(`taskNames/${id}`).set(null))
     }
 
     render() {
@@ -108,7 +121,7 @@ class App extends React.Component {
                         <br/>
                         <div style={{textAlign: "right"}}>
                             <Button>Zaznacz wszystkie</Button>
-                            <Button>Usuń zaznaczone</Button>
+                            <Button onClick={this.removeAll}>Usuń zaznaczone</Button>
                         </div>
                         <br/>
                         <h4>Lista zadań</h4>
@@ -130,14 +143,14 @@ class App extends React.Component {
                                             <th>Opis</th>
                                             <th>Status</th>
                                             <th>Data dodania</th>
-                                            <th>Akcja</th>
-                                            <th>Zaznacz</th>
+                                            <th style={{width: "20px"}}>Akcja</th>
+                                            <th style={{width: "18px"}}>Zaznacz</th>
 
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {
-                                            this.props.tasks.map(
+                                            this.props.tasks && this.props.tasks.map(
                                                 ({id, taskDate, taskName, taskDesc, taskStatus}, index) => (
                                                     <tr key={id}>
                                                         <td>
@@ -155,10 +168,12 @@ class App extends React.Component {
                                                         <td>
                                                             {taskDate}
                                                         </td>
-                                                        <td><Button onClick={()=>this.props.deleteTask(id)} bsStyle="danger"> Usuń</Button>
+                                                        <td><Button onClick={() => this.props.deleteTask(id)}
+                                                                    bsStyle="danger"> Usuń</Button>
                                                         </td>
                                                         <td style={{textAlign: "center"}}>
-                                                            <input onChange={this.handleCheckboxOn} type="checkbox"></input>
+                                                            <input onChange={() => this.handleCheckboxOn(id)}
+                                                                   type="checkbox"></input>
                                                         </td>
 
                                                     </tr>

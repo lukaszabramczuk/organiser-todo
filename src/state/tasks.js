@@ -15,15 +15,11 @@ export const addNewTask = (newTaskData) => (dispatch, getState) => {
     database().ref(`taskNames/${nextIndex}`).set({
         ...newTaskData,
         id: nextIndex
-    }).then(() => {
-        alert('Dodano zadanie!')})
+    })
 }
 
 export const deleteTask = (id) => (dispatch, getState) => {
     database().ref(`taskNames/${id}`).set(null)
-        .then(() => {
-            alert('Usunięto zadanie!')
-        })
 }
 
 
