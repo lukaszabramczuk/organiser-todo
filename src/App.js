@@ -35,7 +35,8 @@ class App extends React.Component {
             taskAddData: '',
             taskStatus: '',
             taskDesc: '',
-            toRemove: []
+            toRemove: [],
+            show: false
         }
     }
 
@@ -90,6 +91,8 @@ class App extends React.Component {
 
 
     render() {
+
+        let close = () => this.setState({ show: false });
 
         return (
             <Router>
@@ -153,8 +156,9 @@ class App extends React.Component {
                                             <th>Opis</th>
                                             <th>Status</th>
                                             <th>Data dodania</th>
-                                            <th style={{width: "20px"}}>Akcja</th>
-                                            <th style={{width: "18px"}}>Zaznacz</th>
+                                            <th style={{width: "20px", textAlign: "center"}}>Edytuj</th>
+                                            <th style={{width: "20px", textAlign: "center"}}>Akcja</th>
+                                            <th style={{width: "18px", textAlign: "center"}}>Zaznacz</th>
 
                                         </tr>
                                         </thead>
@@ -178,10 +182,13 @@ class App extends React.Component {
                                                         <td>
                                                             {taskDate}
                                                         </td>
-                                                        <td><EditTask id={id}/></td>
-                                                        {/*<td><Button onClick={() => this.props.deleteTask(id)}*/}
-                                                                    {/*>Edytuj</Button>*/}
-                                                        {/*</td>*/}
+                                                        <td> <Button
+                                                            onClick={() => this.setState({ show: true })}
+                                                        >
+                                                            Edytuj
+                                                        </Button>
+                                                            <EditTask show={this.state.show} onHide={close} id={id} />
+                                                        </td>
                                                         <td><Button onClick={() => this.props.deleteTask(id)}
                                                                     bsStyle="danger">Usuń</Button>
                                                         </td>

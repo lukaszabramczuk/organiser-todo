@@ -5,45 +5,60 @@ import {connect} from 'react-redux'
 
 import {
     Button,
-    Modal
+    Modal,
+    FormGroup,
+    FormControl
 } from 'react-bootstrap'
 
 
 class EditTask extends React.Component {
 
-    state =  {
-        show: false
+    state = {
+        show: false,
+        taskName: this.props.id.
+
     }
 
     getInitialState() {
-        return { show: false };
+        return {show: false};
     }
+
+
+    handleEditedTask = (event) => {
+        this.setState({
+            taskName: event.target.value
+        })
+    }
+
 
     render() {
 
-        let close = () => this.setState({ show: false });
-
         return (
-            <div className="modal-container" style={{ height: 200 }}>
-                <Button
-                    onClick={() => this.setState({ show: true })}
-                >
-                    Edytuj
-                </Button>
+            <div className="modal-container">
                 <Modal
-                    show={this.state.show}
-                    onHide={close}
-                    container={this}
-                    aria-labelledby="contained-modal-title"
+                    {...this.props}
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">Edytuj zadanie</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        sdf
+                        <div>
+                            <form>
+                                <FormGroup>
+                                    <FormControl type="text" placeholder="Nazwa zadania..."
+                                                 value={this.state.taskName}
+                                                 onChange={this.handleEditedTask}/>
+                                </FormGroup>
+                                <FormGroup controlId="formControlsTextarea">
+                                    <FormControl onChange={this.handleMessageChange} style={{height: 100}}
+                                                 componentClass="textarea"
+                                                 placeholder="Opis zadania..." value={this.props.id.taskDesc}/>
+                                </FormGroup>
+                            </form>
+                        </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button bsStyle="primary" onClick={close}>Zapisz</Button>
+                        <Button bsStyle="primary" onClick={this.props.onHide}>Zapisz</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
