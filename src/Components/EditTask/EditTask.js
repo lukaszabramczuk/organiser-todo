@@ -11,6 +11,10 @@ import {
 
 class EditTask extends React.Component {
 
+    state =  {
+        show: false
+    }
+
     getInitialState() {
         return { show: false };
     }
@@ -22,11 +26,9 @@ class EditTask extends React.Component {
         return (
             <div className="modal-container" style={{ height: 200 }}>
                 <Button
-                    bsStyle="primary"
-                    bsSize="large"
                     onClick={() => this.setState({ show: true })}
                 >
-                    Launch contained modal
+                    Edytuj
                 </Button>
                 <Modal
                     show={this.state.show}
@@ -41,7 +43,7 @@ class EditTask extends React.Component {
                         sdf
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={close}>Zapisz</Button>
+                        <Button bsStyle="primary" onClick={close}>Zapisz</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

@@ -178,7 +178,7 @@ class App extends React.Component {
                                                         <td>
                                                             {taskDate}
                                                         </td>
-                                                        <td><EditTask/></td>
+                                                        <td><EditTask id={id}/></td>
                                                         {/*<td><Button onClick={() => this.props.deleteTask(id)}*/}
                                                                     {/*>Edytuj</Button>*/}
                                                         {/*</td>*/}
