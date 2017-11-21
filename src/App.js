@@ -8,12 +8,16 @@ import {
     Button,
     FormGroup,
     FormControl,
-    Table
+    Table,
+    Link,
+    Modal
 } from 'react-bootstrap'
 
 
 import {connect} from 'react-redux'
 import {database} from "./firebase";
+
+import EditTask from './Components/EditTask/EditTask'
 
 import {addNewTask, deleteTask} from './state/tasks'
 
@@ -83,7 +87,10 @@ class App extends React.Component {
         this.state.toRemove.forEach((id) => database().ref(`taskNames/${id}`).set(null))
     }
 
+
+
     render() {
+
         return (
             <Router>
                 <Grid>
@@ -123,7 +130,7 @@ class App extends React.Component {
                         </div>
                         <br/>
                         <div style={{textAlign: "right"}}>
-                            <Button>Zaznacz wszystkie</Button>
+                            {/*<Button>Zaznacz wszystkie</Button>*/}
                             <Button onClick={this.removeAll}>Usuń zaznaczone</Button>
                         </div>
                         <br/>
@@ -171,8 +178,12 @@ class App extends React.Component {
                                                         <td>
                                                             {taskDate}
                                                         </td>
+                                                        <td><EditTask/></td>
+                                                        {/*<td><Button onClick={() => this.props.deleteTask(id)}*/}
+                                                                    {/*>Edytuj</Button>*/}
+                                                        {/*</td>*/}
                                                         <td><Button onClick={() => this.props.deleteTask(id)}
-                                                                    bsStyle="danger"> Usuń</Button>
+                                                                    bsStyle="danger">Usuń</Button>
                                                         </td>
                                                         <td style={{textAlign: "center"}}>
                                                             <input onChange={() => this.handleCheckboxOn(id)}
