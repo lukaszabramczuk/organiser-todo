@@ -15,7 +15,7 @@ class EditTask extends React.Component {
 
     state = {
         show: false,
-        taskName: this.props.id.
+        taskName: this.props.id
 
     }
 
