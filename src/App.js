@@ -29,7 +29,7 @@ class App extends React.Component {
             id: '',
             taskName: '',
             taskAddData: '',
-            taskStatus: '0',
+            taskStatus: '',
             taskDesc: '',
             toRemove: []
         }
@@ -72,7 +72,10 @@ class App extends React.Component {
         };
 
         this.props.addNewTask(newTaskData)
-
+        this.setState({
+            taskName: '',
+            taskDesc: ''
+        })
     }
 
     removeAll = (event) => {
