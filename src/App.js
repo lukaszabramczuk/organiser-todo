@@ -94,9 +94,7 @@ class App extends React.Component {
 
     render() {
 
-        let close = () => this.setState({ show: false });
-
-        let closeDel = () => this.setState({ showdel: false });
+        // let closeDel = () => this.setState({ showdel: false });
 
         return (
             <Router>
@@ -140,7 +138,7 @@ class App extends React.Component {
                             {/*<Button>Zaznacz wszystkie</Button>*/}
                             <Button onClick={this.removeAll}>Usuń zaznaczone</Button>
                             <Button onClick={() => this.setState({ showDel: true })}>Usuń zaznaczone MOD</Button>
-                            <DeleteTaskCheckbox show={this.state.showDel} onHide={close} />
+                            {/*<DeleteTaskCheckbox show={this.state.showDel} onHide={close} />*/}
                         </div>
                         <br/>
                         <h4>Lista zadań</h4>
@@ -188,12 +186,8 @@ class App extends React.Component {
                                                         <td>
                                                             {taskDate}
                                                         </td>
-                                                        <td><Button
-                                                            onClick={() => this.setState({ show: true })}
-                                                        >
-                                                            Edytuj
-                                                        </Button>
-                                                            <EditTask show={this.state.show} onHide={close} taskDesc={taskDesc} taskName={taskName} id={id} />
+                                                        <td>
+                                                            <EditTask taskData={taskDate} taskDesc={taskDesc} taskName={taskName} id={id} />
                                                         </td>
                                                         <td><Button onClick={() => this.props.deleteTask(id)}
                                                                     bsStyle="danger">Usuń</Button>

@@ -16,7 +16,8 @@ class EditTask extends React.Component {
     state = {
         show: false,
         taskDesc: this.props.taskDesc,
-        taskName: this.props.taskName
+        taskName: this.props.taskName,
+
     }
 
     getInitialState() {
@@ -45,6 +46,9 @@ class EditTask extends React.Component {
         database().ref(`taskNames/${id}`).set({
             taskName: this.state.taskName,
             taskDesc: this.state.taskDesc,
+            id: this.props.id,
+            taskDate: this.props.date
+
         }).then(() => {
             console.log('updated')
         })
@@ -53,10 +57,20 @@ class EditTask extends React.Component {
 
     render() {
 
+        let close = () => this.setState({ show: false });
+
         return (
             <div className="modal-container">
+                <Button
+                    onClick={() => this.setState({ show: true })}
+                >
+                    Edytuj
+                </Button>
                 <Modal
-                    {...this.props}
+                    show={this.state.show}
+                    onHide={close}
+                    container={this}
+                    aria-labelledby="contained-modal-title"
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title">Edytuj zadanie</Modal.Title>
