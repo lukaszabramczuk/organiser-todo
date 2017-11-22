@@ -22,7 +22,6 @@ import DeleteTaskCheckbox from './Components/DeleteTaskCheckbox/DeleteTaskCheckb
 import {addNewTask, deleteTask} from './state/tasks'
 
 import './App.css';
-import StatusButton from "./Components/StatusButton/StatusButton";
 
 
 class App extends React.Component {
@@ -172,7 +171,7 @@ class App extends React.Component {
                                                             {taskDesc}
                                                         </td>
                                                         <td>
-                                                            <StatusButton taskStatus={taskStatus}/>
+                                                            <Button>{taskStatus}</Button>
                                                         </td>
                                                         <td>
                                                             {taskDate}
