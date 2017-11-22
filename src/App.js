@@ -147,7 +147,7 @@ class App extends React.Component {
                                             <th>ID</th>
                                             <th>Nazwa</th>
                                             <th>Opis</th>
-                                            <th>Status</th>
+                                            <th style={{width: "18px", textAlign: "center"}}>Status</th>
                                             <th>Data dodania</th>
                                             <th style={{width: "20px", textAlign: "center"}}>Edytuj</th>
                                             <th style={{width: "20px", textAlign: "center"}}>Akcja</th>

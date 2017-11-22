@@ -10,12 +10,14 @@ class StatusButton extends React.Component {
 
     state = {
         taskStatus: this.props.taskStatus,
-        id: this.props.id
+        id: this.props.id,
+        buttonColor: 'danger'
     }
 
     handleStatusButton = () => {
         let path = database().ref(`taskNames/${this.state.id}/taskStatus`)
         let status = this.state.taskStatus
+
 
         status === 'czekające' ? this.setState({taskStatus: 'realizowane'})
             : status==='realizowane' ? this.setState({taskStatus: 'gotowe'})
@@ -23,15 +25,18 @@ class StatusButton extends React.Component {
 
         path.set(this.state.taskStatus)
 
-
+        status === 'czekające' ? this.setState({buttonColor: 'warning'})
+            : status==='realizowane' ? this.setState({buttonColor: 'info'})
+            : this.setState({buttonColor: 'success'});
 
     }
 
+    // style={{width: '100px'}}
 
     render() {
 
         return (
-            <Button onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
+            <Button bsStyle={this.state.buttonColor}  onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
 
         )
     }
