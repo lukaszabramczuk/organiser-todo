@@ -47,10 +47,14 @@ class EditTask extends React.Component {
             taskName: this.state.taskName,
             taskDesc: this.state.taskDesc,
             id: this.props.id,
-            taskDate: this.props.date
+            taskDate: this.props.taskDate
 
         }).then(() => {
             console.log('updated')
+        })
+
+        this.setState({
+            show: false
         })
     }
 
