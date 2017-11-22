@@ -8,12 +8,17 @@ import {
     Button,
     FormGroup,
     FormControl,
-    Table
+    Table,
+    Link,
+    Modal
 } from 'react-bootstrap'
 
 
 import {connect} from 'react-redux'
 import {database} from "./firebase";
+
+import EditTask from './Components/EditTask/EditTask'
+import DeleteTaskCheckbox from './Components/DeleteTaskCheckbox/DeleteTaskCheckbox'
 
 import {addNewTask, deleteTask} from './state/tasks'
 
@@ -31,7 +36,9 @@ class App extends React.Component {
             taskAddData: '',
             taskStatus: '',
             taskDesc: '',
-            toRemove: []
+            toRemove: [],
+            show: false,
+            showDel: false
         }
     }
 
@@ -72,7 +79,10 @@ class App extends React.Component {
         };
 
         this.props.addNewTask(newTaskData)
-
+        this.setState({
+            taskName: '',
+            taskDesc: ''
+        })
     }
 
     removeAll = (event) => {
@@ -80,7 +90,12 @@ class App extends React.Component {
         this.state.toRemove.forEach((id) => database().ref(`taskNames/${id}`).set(null))
     }
 
+
+
     render() {
+
+        // let closeDel = () => this.setState({ showdel: false });
+
         return (
             <Router>
                 <Grid>
@@ -122,6 +137,8 @@ class App extends React.Component {
                         <div style={{textAlign: "right"}}>
                             {/*<Button>Zaznacz wszystkie</Button>*/}
                             <Button onClick={this.removeAll}>Usuń zaznaczone</Button>
+                            <Button onClick={() => this.setState({ showDel: true })}>Usuń zaznaczone MOD</Button>
+                            {/*<DeleteTaskCheckbox show={this.state.showDel} onHide={close} />*/}
                         </div>
                         <br/>
                         <h4>Lista zadań</h4>
@@ -143,8 +160,9 @@ class App extends React.Component {
                                             <th>Opis</th>
                                             <th>Status</th>
                                             <th>Data dodania</th>
-                                            <th style={{width: "20px"}}>Akcja</th>
-                                            <th style={{width: "18px"}}>Zaznacz</th>
+                                            <th style={{width: "20px", textAlign: "center"}}>Edytuj</th>
+                                            <th style={{width: "20px", textAlign: "center"}}>Akcja</th>
+                                            <th style={{width: "18px", textAlign: "center"}}>Zaznacz</th>
 
                                         </tr>
                                         </thead>
@@ -168,8 +186,11 @@ class App extends React.Component {
                                                         <td>
                                                             {taskDate}
                                                         </td>
+                                                        <td>
+                                                            <EditTask taskDate={taskDate} taskDesc={taskDesc} taskName={taskName} id={id} />
+                                                        </td>
                                                         <td><Button onClick={() => this.props.deleteTask(id)}
-                                                                    bsStyle="danger"> Usuń</Button>
+                                                                    bsStyle="danger">Usuń</Button>
                                                         </td>
                                                         <td style={{textAlign: "center"}}>
                                                             <input onChange={() => this.handleCheckboxOn(id)}
