@@ -134,7 +134,8 @@ class App extends React.Component {
                         <div style={{
                             border: "1px solid white",
                             borderRadius: 10,
-                            padding: 15
+                            padding: 15,
+                            backgroundColor: "white"
                         }}>
 
                             {
