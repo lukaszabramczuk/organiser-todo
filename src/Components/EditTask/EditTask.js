@@ -15,8 +15,8 @@ class EditTask extends React.Component {
 
     state = {
         show: false,
-        taskName: this.props.id
-
+        taskDesc: this.props.taskDesc,
+        taskName: this.props.taskName
     }
 
     getInitialState() {
@@ -24,9 +24,29 @@ class EditTask extends React.Component {
     }
 
 
-    handleEditedTask = (event) => {
+    handleEditedTaskName = (event) => {
         this.setState({
             taskName: event.target.value
+        })
+    }
+
+    handleEditedTaskDesc = (event) => {
+        this.setState({
+            taskDesc: event.target.value
+        })
+    }
+
+    handleUpdateTask = (event) => {
+        event.preventDefault()
+
+        let id = this.props.id
+
+
+        database().ref(`taskNames/${id}`).set({
+            taskName: this.state.taskName,
+            taskDesc: this.state.taskDesc,
+        }).then(() => {
+            console.log('updated')
         })
     }
 
@@ -47,18 +67,21 @@ class EditTask extends React.Component {
                                 <FormGroup>
                                     <FormControl type="text" placeholder="Nazwa zadania..."
                                                  value={this.state.taskName}
-                                                 onChange={this.handleEditedTask}/>
+                                                 onChange={this.handleEditedTaskName}/>
                                 </FormGroup>
                                 <FormGroup controlId="formControlsTextarea">
-                                    <FormControl onChange={this.handleMessageChange} style={{height: 100}}
+                                    <FormControl onChange={this.handleEditedTaskDesc}
+                                                 style={{height: 100}}
                                                  componentClass="textarea"
-                                                 placeholder="Opis zadania..." value={this.props.id.taskDesc}/>
+                                                 placeholder="Opis zadania..."
+                                                 value={this.state.taskDesc}/>
                                 </FormGroup>
                             </form>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button bsStyle="primary" onClick={this.props.onHide}>Zapisz</Button>
+                        {/*<Button bsStyle="primary" onClick={this.props.onHide}>Zapisz</Button>*/}
+                        <Button bsStyle="primary" onClick={this.handleUpdateTask}>Zapisz</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
