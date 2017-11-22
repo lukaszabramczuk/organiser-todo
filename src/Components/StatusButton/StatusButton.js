@@ -25,14 +25,23 @@ class StatusButton extends React.Component {
 
         path.set(this.state.taskStatus)
 
-
     }
 
+    buttonColor = () => {
+        let status = this.state.taskStatus;
+        let buttonColor = 'danger'
+
+        status === 'czekające' ? buttonColor = 'warning'
+            : status === 'realizowane' ? buttonColor = 'info'
+            : buttonColor = 'success'
+
+        return buttonColor
+    }
 
     render() {
 
         return (
-            <Button bsStyle={this.state.buttonColor} style={{width: '100px'}} onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
+            <Button bsStyle={this.buttonColor()} style={{width: '100px'}} onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
 
         )
     }

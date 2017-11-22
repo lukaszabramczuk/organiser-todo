@@ -177,7 +177,7 @@ class App extends React.Component {
                                                             {taskDate}
                                                         </td>
                                                         <td>
-                                                            <EditTask taskDate={taskDate} taskDesc={taskDesc} taskName={taskName} id={id} />
+                                                            <EditTask taskStatus={taskStatus} taskDate={taskDate} taskDesc={taskDesc} taskName={taskName} id={id} />
                                                         </td>
                                                         <td><Button onClick={() => this.props.deleteTask(id)}
                                                                     bsStyle="danger">Usuń</Button>

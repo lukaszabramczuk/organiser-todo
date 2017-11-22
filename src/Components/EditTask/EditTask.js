@@ -17,7 +17,7 @@ class EditTask extends React.Component {
         show: false,
         taskDesc: this.props.taskDesc,
         taskName: this.props.taskName,
-
+        taskStatus: this.props.taskStatus
     }
 
     getInitialState() {
@@ -46,6 +46,7 @@ class EditTask extends React.Component {
         database().ref(`taskNames/${id}`).set({
             taskName: this.state.taskName,
             taskDesc: this.state.taskDesc,
+            taskStatus: this.props.taskStatus,
             id: this.props.id,
             taskDate: this.props.taskDate
 
