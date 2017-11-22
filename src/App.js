@@ -135,10 +135,8 @@ class App extends React.Component {
                         </div>
                         <br/>
                         <div style={{textAlign: "right"}}>
-                            {/*<Button>Zaznacz wszystkie</Button>*/}
                             <Button onClick={this.removeAll}>Usuń zaznaczone</Button>
-                            <Button onClick={() => this.setState({ showDel: true })}>Usuń zaznaczone MOD</Button>
-                            {/*<DeleteTaskCheckbox show={this.state.showDel} onHide={close} />*/}
+                            <DeleteTaskCheckbox />
                         </div>
                         <br/>
                         <h4>Lista zadań</h4>

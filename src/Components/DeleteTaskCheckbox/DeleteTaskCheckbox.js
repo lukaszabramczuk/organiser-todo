@@ -14,19 +14,12 @@ import {
 class DeleteTaskCheckbox extends React.Component {
 
     state = {
-        showDel: false
+        show: false
 
-    }
+            }
 
     getInitialState() {
-        return {showDel: false};
-    }
-
-
-    handleEditedTask = (event) => {
-        this.setState({
-            taskName: event.target.value
-        })
+        return {show: false};
     }
 
     removeAll = (event) => {
@@ -36,20 +29,28 @@ class DeleteTaskCheckbox extends React.Component {
 
     render() {
 
+        let close = () => this.setState({ show: false });
+
         return (
             <div className="modal-container">
+                <Button onClick={() => this.setState({ show: true })}>Usuń zaznaczone MOD</Button>
                 <Modal
-                    {...this.props}
+                    show={this.state.show}
+                    onHide={close}
+                    container={this}
+                    aria-labelledby="contained-modal-title"
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title id="contained-modal-title">Czy na pewno chcesz skasowac zaznaczone zadania ?</Modal.Title>
+                        <Modal.Title style={{textAlign: "left"}} id="contained-modal-title">Czy usunąć zaznaczone ?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div>
+
                             <form>
+
                                 <FormGroup style={{textAlign: "center"}}>
-                                    <Button onClick={this.removeAll}bsStyle="danger" style={{width: 120}}>Tak</Button>
-                                    <Button onClick={this.props.onHide} bsStyle="primary" style={{width: 120}}>Nie</Button>
+                                    <Button onClick={this.props.removeAll} style={{width: 120}}>Tak</Button>
+                                    <Button onClick={this.state.onHide}  style={{width: 120}}>Nie</Button>
                                 </FormGroup>
                             </form>
                         </div>
