@@ -1,18 +1,29 @@
 import React from 'react'
 import {database} from './../../firebase'
 
-
 import {
-    Button,
-    Modal,
-    FormGroup,
-    FormControl
+    Button
 } from 'react-bootstrap'
 
 
 class StatusButton extends React.Component {
 
     state = {
+        taskStatus: this.props.taskStatus,
+        id: this.props.id
+    }
+
+    handleStatusButton = () => {
+        let path = database().ref(`taskNames/${this.state.id}/taskStatus`)
+        let status = this.state.taskStatus
+
+        status === 'czekające' ? this.setState({taskStatus: 'realizowane'})
+            : status==='realizowane' ? this.setState({taskStatus: 'gotowe'})
+            : this.setState({taskStatus: 'gotowe'});
+
+        path.set(this.state.taskStatus)
+
+
 
     }
 
@@ -20,7 +31,7 @@ class StatusButton extends React.Component {
     render() {
 
         return (
-            <Button>{this.props.statusButton}</Button>
+            <Button onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
 
         )
     }

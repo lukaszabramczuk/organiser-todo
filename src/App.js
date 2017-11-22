@@ -18,7 +18,7 @@ import {database} from "./firebase";
 
 import EditTask from './Components/EditTask/EditTask'
 import DeleteTaskCheckbox from './Components/DeleteTaskCheckbox/DeleteTaskCheckbox'
-import StatusButton from './Component/StatusButton/Statusbutton'
+import StatusButton from './Components/StatusButton/StatusButton'
 
 import {addNewTask, deleteTask} from './state/tasks'
 
@@ -170,7 +170,7 @@ class App extends React.Component {
                                                             {taskDesc}
                                                         </td>
                                                         <td>
-                                                            <StatusButton taskStatus={taskStatus}/>
+                                                            <StatusButton taskStatus={taskStatus} id={id}/>
                                                         </td>
                                                         <td>
                                                             {taskDate}
