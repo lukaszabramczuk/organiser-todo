@@ -6,8 +6,7 @@ import {connect} from 'react-redux'
 import {
     Button,
     Modal,
-    FormGroup,
-    FormControl
+    FormGroup
 } from 'react-bootstrap'
 
 
@@ -24,7 +23,11 @@ class DeleteTaskCheckbox extends React.Component {
 
     removeAll = (event) => {
         event.preventDefault();
-        this.state.toRemove.forEach((id) => database().ref(`taskNames/${id}`).set(null))
+        this.props.toRemove.forEach((id) => database().ref(`taskNames/${id}`).set(null))
+
+        this.setState({
+            show: false
+        })
     }
 
     render() {
@@ -33,7 +36,7 @@ class DeleteTaskCheckbox extends React.Component {
 
         return (
             <div className="modal-container">
-                <Button onClick={() => this.setState({ show: true })}>Usuń zaznaczone MOD</Button>
+                <Button onClick={() => this.setState({ show: true })}>Usuń zaznaczone</Button>
                 <Modal
                     show={this.state.show}
                     onHide={close}
@@ -49,8 +52,8 @@ class DeleteTaskCheckbox extends React.Component {
                             <form>
 
                                 <FormGroup style={{textAlign: "center"}}>
-                                    <Button onClick={this.props.removeAll} style={{width: 120}}>Tak</Button>
-                                    <Button onClick={this.state.onHide}  style={{width: 120}}>Nie</Button>
+                                    <Button onClick={this.removeAll} style={{width: 120}}>Tak</Button>
+                                    <Button onClick={() => this.setState({ show: false })}  style={{width: 120}}>Nie</Button>
                                 </FormGroup>
                             </form>
                         </div>

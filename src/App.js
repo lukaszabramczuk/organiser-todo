@@ -8,9 +8,8 @@ import {
     Button,
     FormGroup,
     FormControl,
-    Table,
-    Link,
-    Modal
+    Table
+
 } from 'react-bootstrap'
 
 
@@ -85,12 +84,6 @@ class App extends React.Component {
         })
     }
 
-    removeAll = (event) => {
-        event.preventDefault();
-        this.state.toRemove.forEach((id) => database().ref(`taskNames/${id}`).set(null))
-    }
-
-
 
     render() {
 
@@ -135,8 +128,7 @@ class App extends React.Component {
                         </div>
                         <br/>
                         <div style={{textAlign: "right"}}>
-                            <Button onClick={this.removeAll}>Usuń zaznaczone</Button>
-                            <DeleteTaskCheckbox />
+                            <DeleteTaskCheckbox toRemove={this.state.toRemove}/>
                         </div>
                         <br/>
                         <h4>Lista zadań</h4>
