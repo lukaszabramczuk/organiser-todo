@@ -13,17 +13,18 @@ import {
 class StatusButton extends React.Component {
 
     state = {
-        show: false,
-        taskDesc: this.props.taskDesc,
-        taskName: this.props.taskName,
 
     }
 
+    handleStatusButton = {
+
+
+    }
 
     render() {
 
         return (
-            <Button></Button>
+            <Button onClick={this.handleStatusButton}>{this.props.taskStatus}</Button>
 
         )
     }
