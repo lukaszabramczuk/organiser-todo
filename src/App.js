@@ -96,16 +96,11 @@ class App extends React.Component {
         })
     }
 
-    counterTasksInRealise = (add) => {
-        let actualMax = 0
-        let date = `${new Date().getDate()}_${new Date().getMonth() + 1}`
+    counterTasksInRealise = (tasks) => {
+        let inRealise = (this.props.tasks.filter((task) => task.taskStatus === 'realizowane')).length
 
-        database().ref(`inRealise/`).on('value', snapshot => {
-            actualMax = snapshot.val()
-        })
+        return inRealise
 
-
-        return actualMax
     }
 
     getStyleTaskDate = (firstDate, diff, color, status, cancel, cancel2) => {
@@ -127,7 +122,7 @@ class App extends React.Component {
                         boxShadow: "0px 0px 20px lightgrey"
                     }}>
                         <h3 style={{color: "grey"}}> - = ToDo Organiser = -</h3>
-                        <h4 style={{textAlign: "right"}}>Aktualnie realizujesz {this.counterTasksInRealise()} zadań </h4>
+                        <h4 style={{textAlign: "right"}}>Aktualnie realizujesz zadań: {this.counterTasksInRealise()} </h4>
                     </div>
                     <div style={{
                         border: "1px solid lightgrey",
