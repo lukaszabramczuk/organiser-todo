@@ -189,7 +189,7 @@ class App extends React.Component {
                                         <thead>
                                         <tr>
                                             <th style={{width: "5px", textAlign: "center"}}>ID</th>
-                                            <th>Nazwa</th>
+                                            <th style={{width: "150px"}}>Nazwa</th>
                                             <th>Opis</th>
                                             <th style={{width: "18px", textAlign: "center"}}>Status</th>
                                             <th style={{width: "125px", textAlign: "center"}}>Dodano</th>
