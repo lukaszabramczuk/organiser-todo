@@ -8,7 +8,10 @@ import {
     Button,
     FormGroup,
     FormControl,
-    Table
+    Table,
+    ButtonToolbar,
+    ToggleButton,
+    ToggleButtonGroup
 
 } from 'react-bootstrap'
 
@@ -128,6 +131,16 @@ class App extends React.Component {
                         <br/>
                         <div style={{textAlign: "right"}}>
                             <DeleteTaskCheckbox toRemove={this.state.toRemove}/>
+                        </div>
+                        <div>
+                            <ButtonToolbar>
+                                <h4>Filtowanie statusów</h4>
+                                <ToggleButtonGroup type="checkbox" defaultValue={[1,2,3]}>
+                                    <ToggleButton value={1}>Czekające</ToggleButton>
+                                    <ToggleButton value={2}>Realizowane</ToggleButton>
+                                    <ToggleButton value={3}>Gotowe</ToggleButton>
+                                </ToggleButtonGroup>
+                            </ButtonToolbar>
                         </div>
                         <br/>
                         <h4>Lista zadań</h4>
