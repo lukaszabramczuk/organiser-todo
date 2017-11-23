@@ -41,7 +41,7 @@ class App extends React.Component {
             taskDesc: '',
             toRemove: [],
             show: false,
-            filter: false
+            filter: ["czekające", "realizowane", "gotowe"]
 
         }
     }
@@ -148,7 +148,9 @@ class App extends React.Component {
                                     <ToggleButton value={"realizowane"}>Realizowane</ToggleButton>
                                     <ToggleButton value={"gotowe"}>Gotowe</ToggleButton>
                                 </ToggleButtonGroup>
+                                <Button> lalalaal</Button>
                             </ButtonToolbar>
+
                         </div>
                         <br/>
                         <h4>Lista zadań</h4>
@@ -178,9 +180,9 @@ class App extends React.Component {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {   this.props.tasks.filter((task) => {
-                                            return this.state.filter ? task.filter === this.state.filter : true
-                                        }).map(
+                                        {this.props.tasks
+                                            .filter((task) => this.state.filter.includes(task.taskStatus))
+                                            .map(
                                                 ({id, taskDate, taskName, taskDesc, taskStatus}, index) => (
                                                     <tr key={id}>
                                                         <td>
