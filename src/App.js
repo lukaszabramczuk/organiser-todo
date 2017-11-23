@@ -41,7 +41,8 @@ class App extends React.Component {
             taskDesc: '',
             toRemove: [],
             show: false,
-            showDel: false
+            filter: false
+
         }
     }
 
@@ -88,6 +89,12 @@ class App extends React.Component {
         })
     }
 
+    filterHandler = (value) => {
+        console.log(value)
+        this.setState({
+            filter: value
+        })
+    }
 
     render() {
 
@@ -135,10 +142,11 @@ class App extends React.Component {
                         <div>
                             <ButtonToolbar>
                                 <h4>Filtowanie statusów</h4>
-                                <ToggleButtonGroup type="checkbox" defaultValue={[1,2,3]}>
-                                    <ToggleButton value={1}>Czekające</ToggleButton>
-                                    <ToggleButton value={2}>Realizowane</ToggleButton>
-                                    <ToggleButton value={3}>Gotowe</ToggleButton>
+                                <ToggleButtonGroup onChange={this.filterHandler} type="checkbox"
+                                                   defaultValue={["czekające", "realizowane", "gotowe"]}>
+                                    <ToggleButton value={"czekające"}>Czekające</ToggleButton>
+                                    <ToggleButton value={"realizowane"}>Realizowane</ToggleButton>
+                                    <ToggleButton value={"gotowe"}>Gotowe</ToggleButton>
                                 </ToggleButtonGroup>
                             </ButtonToolbar>
                         </div>
@@ -170,8 +178,9 @@ class App extends React.Component {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {
-                                            this.props.tasks.map(
+                                        {   this.props.tasks.filter((task) => {
+                                            return this.state.filter ? task.filter === this.state.filter : true
+                                        }).map(
                                                 ({id, taskDate, taskName, taskDesc, taskStatus}, index) => (
                                                     <tr key={id}>
                                                         <td>
@@ -190,7 +199,8 @@ class App extends React.Component {
                                                             {taskDate}
                                                         </td>
                                                         <td>
-                                                            <EditTask taskStatus={taskStatus} taskDate={taskDate} taskDesc={taskDesc} taskName={taskName} id={id} />
+                                                            <EditTask taskStatus={taskStatus} taskDate={taskDate}
+                                                                      taskDesc={taskDesc} taskName={taskName} id={id}/>
                                                         </td>
                                                         <td><Button onClick={() => this.props.deleteTask(id)}
                                                                     bsStyle="danger">Usuń</Button>
