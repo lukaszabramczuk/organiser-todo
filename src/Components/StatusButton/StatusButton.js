@@ -52,10 +52,28 @@ class StatusButton extends React.Component {
         return buttonColor
     }
 
+    counterTasks = (add) => {
+        let actualMax = 0
+        let inRealise = (this.props.tasks.filter((task) => task.taskStatus === 'realizowane')).length + add
+        let date = `${new Date().getDate()}_${new Date().getMonth() + 1}`
+        let path = database().ref(`inRealise/${date}`)
+
+        database().ref(`inRealise/`).on('value', snapshot => {
+            actualMax = snapshot.val()
+
+        })
+
+
+        return inRealise <= actualMax ? null : path.set(inRealise)
+    }
+
     render() {
 
         return (
-            <Button bsSize="xsmall" bsStyle={this.buttonColor()} style={{width: '80px'}} onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
+            <Button bsSize="xsmall"
+                    bsStyle={this.buttonColor()}
+                    style={{width: '80px'}}
+                    onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
 
         )
     }

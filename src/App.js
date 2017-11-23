@@ -15,7 +15,7 @@ import {
 
 } from 'react-bootstrap'
 
-
+import {database} from './firebase'
 import {connect} from 'react-redux'
 
 import EditTask from './Components/EditTask/EditTask'
@@ -96,6 +96,18 @@ class App extends React.Component {
         })
     }
 
+    counterTasksInRealise = (add) => {
+        let actualMax = 0
+        let date = `${new Date().getDate()}_${new Date().getMonth() + 1}`
+
+        database().ref(`inRealise/`).on('value', snapshot => {
+            actualMax = snapshot.val()
+        })
+
+
+        return actualMax
+    }
+
     getStyleTaskDate = (firstDate, diff, color, status, cancel, cancel2) => {
         let date = new Date().getTime()
         let dateDiff = date - firstDate
@@ -115,6 +127,7 @@ class App extends React.Component {
                         boxShadow: "0px 0px 20px lightgrey"
                     }}>
                         <h3 style={{color: "grey"}}> - = ToDo Organiser = -</h3>
+                        <h4 style={{textAlign: "right"}}>Aktualnie realizujesz {this.counterTasksInRealise()} zadań </h4>
                     </div>
                     <div style={{
                         border: "1px solid lightgrey",
@@ -203,7 +216,8 @@ class App extends React.Component {
                                                             {taskDesc}
                                                         </td>
                                                         <td>
-                                                            <StatusButton taskStatus={taskStatus} id={id}/>
+                                                            <StatusButton taskStatus={taskStatus} id={id}
+                                                                          tasks={this.props.tasks}/>
                                                         </td>
                                                         <td style={this.getStyleTaskDate(taskDate, 432000000, 'red', taskStatus, 'realizowane', 'gotowe')}>
                                                             {taskDate}
@@ -218,7 +232,8 @@ class App extends React.Component {
                                                             <EditTask taskStatus={taskStatus} taskDate={taskDate}
                                                                       taskDesc={taskDesc} taskName={taskName} id={id}/>
                                                         </td>
-                                                        <td><Button bsSize="xsmall" onClick={() => this.props.deleteTask(id)}
+                                                        <td><Button bsSize="xsmall"
+                                                                    onClick={() => this.props.deleteTask(id)}
                                                                     bsStyle="danger">Usuń</Button>
                                                         </td>
                                                         <td style={{textAlign: "center"}}>
