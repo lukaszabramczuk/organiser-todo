@@ -42,7 +42,6 @@ class App extends React.Component {
             toRemove: [],
             show: false,
             filter: ["czekające", "realizowane", "gotowe"]
-
         }
     }
 
@@ -75,6 +74,7 @@ class App extends React.Component {
     handleAddTask = (event) => {
         event.preventDefault();
 
+
         let newTaskData = {
             taskDate: Date().slice(0, 21),
             taskName: this.state.taskName,
@@ -95,6 +95,8 @@ class App extends React.Component {
             filter: value
         })
     }
+
+
 
     render() {
 

@@ -23,8 +23,22 @@ class StatusButton extends React.Component {
             : status==='realizowane' ? this.setState({taskStatus: 'gotowe'})
             : this.setState({taskStatus: 'gotowe'});
 
-        path.set(this.state.taskStatus)
 
+        let pathRealisationStatusDate = database().ref(`taskNames/${this.state.id}/realisationStatusDate`)
+        let pathReadyStatusDate = database().ref(`taskNames/${this.state.id}/readyStatusDate`)
+        let date = Date().slice(0, 21)
+
+        if (status === 'czekające') {
+            path.set('realizowane')
+            pathRealisationStatusDate.set(date)
+            this.setState({taskStatus: 'realizowane'})
+
+        }
+        else if (status === 'realizowane') {
+            path.set('gotowe')
+            pathReadyStatusDate.set(date)
+            this.setState({taskStatus: 'gotowe'})
+        }
     }
 
     buttonColor = () => {
