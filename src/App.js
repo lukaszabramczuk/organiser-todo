@@ -148,7 +148,6 @@ class App extends React.Component {
                                     <ToggleButton value={"realizowane"}>Realizowane</ToggleButton>
                                     <ToggleButton value={"gotowe"}>Gotowe</ToggleButton>
                                 </ToggleButtonGroup>
-                                <Button> lalalaal</Button>
                             </ButtonToolbar>
 
                         </div>
