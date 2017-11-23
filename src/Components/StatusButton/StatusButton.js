@@ -26,17 +26,17 @@ class StatusButton extends React.Component {
 
         let pathRealisationStatusDate = database().ref(`taskNames/${this.state.id}/realisationStatusDate`)
         let pathReadyStatusDate = database().ref(`taskNames/${this.state.id}/readyStatusDate`)
-        let date = Date().slice(0, 21)
+        let date = new Date()
 
         if (status === 'czekające') {
             path.set('realizowane')
-            pathRealisationStatusDate.set(date)
+            pathRealisationStatusDate.set(date.getTime())
             this.setState({taskStatus: 'realizowane'})
 
         }
         else if (status === 'realizowane') {
             path.set('gotowe')
-            pathReadyStatusDate.set(date)
+            pathReadyStatusDate.set(date.getTime())
             this.setState({taskStatus: 'gotowe'})
         }
     }

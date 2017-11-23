@@ -72,10 +72,11 @@ class App extends React.Component {
 
     handleAddTask = (event) => {
         event.preventDefault();
+        let date = new Date()
 
 
         let newTaskData = {
-            taskDate: Date().slice(0, 21),
+            taskDate: date.getTime(),
             taskName: this.state.taskName,
             taskDesc: this.state.taskDesc,
             taskStatus: this.state.taskStatus
@@ -95,7 +96,19 @@ class App extends React.Component {
         })
     }
 
+    getStyleRealisationStatusDate = (firstDate, secondDate, diff, color) => {
+        let dateDiff = firstDate -  secondDate
 
+        return dateDiff > diff ? {color: color} : null
+
+    }
+
+    getStyleTaskDate = (firstDate, diff, color) => {
+        let dateDiff = firstDate +  diff
+
+        return dateDiff > diff ? {color: color} : null
+
+    }
 
     render() {
 
@@ -199,10 +212,10 @@ class App extends React.Component {
                                                         <td>
                                                             <StatusButton taskStatus={taskStatus} id={id}/>
                                                         </td>
-                                                        <td>
+                                                        <td style = {this.getStyleTaskDate(taskDate, 1000, 'red' )} >
                                                             {taskDate}
                                                         </td>
-                                                        <td>
+                                                        <td style = {this.getStyleRealisationStatusDate(realisationStatusDate,taskDate, 259200000, 'red' )} >
                                                             {realisationStatusDate}
                                                         </td>
                                                         <td>
