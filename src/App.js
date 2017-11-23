@@ -17,7 +17,6 @@ import {
 
 
 import {connect} from 'react-redux'
-// import {database} from "./firebase";
 
 import EditTask from './Components/EditTask/EditTask'
 import DeleteTaskCheckbox from './Components/DeleteTaskCheckbox/DeleteTaskCheckbox'
