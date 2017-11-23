@@ -15,7 +15,7 @@ import {
 
 } from 'react-bootstrap'
 
-import {database} from './firebase'
+// import {database} from './firebase'
 import {connect} from 'react-redux'
 
 import EditTask from './Components/EditTask/EditTask'
@@ -110,6 +110,11 @@ class App extends React.Component {
         return status === cancel || status === cancel2 ? null : dateDiff > diff ? {color: color} : null
     }
 
+    convertDate =(x) => {
+        let date = new Date(x).toUTCString()
+        return x ? date : ' '
+    }
+
     render() {
 
         return (
@@ -122,7 +127,7 @@ class App extends React.Component {
                         boxShadow: "0px 0px 20px lightgrey"
                     }}>
                         <h3 style={{color: "grey"}}> - = ToDo Organiser = -</h3>
-                        <h4 style={{textAlign: "right"}}>Aktualnie realizujesz zadań: {this.counterTasksInRealise()} </h4>
+                        <h4 style={{textAlign: "right", color: "grey"}}>Aktualnie realizujesz zadań: {this.counterTasksInRealise()} </h4>
                     </div>
                     <div style={{
                         border: "1px solid lightgrey",
@@ -186,9 +191,9 @@ class App extends React.Component {
                                             <th>Nazwa</th>
                                             <th>Opis</th>
                                             <th style={{width: "18px", textAlign: "center"}}>Status</th>
-                                            <th style={{width: "160px", textAlign: "center"}}>Dodano</th>
-                                            <th style={{width: "160px", textAlign: "center"}}>W realizacji</th>
-                                            <th style={{width: "160px", textAlign: "center"}}>Ukończono</th>
+                                            <th style={{width: "165px", textAlign: "center"}}>Dodano</th>
+                                            <th style={{width: "165px", textAlign: "center"}}>W realizacji</th>
+                                            <th style={{width: "165px", textAlign: "center"}}>Ukończono</th>
                                             <th style={{width: "20px", textAlign: "center"}}>Edytuj</th>
                                             <th style={{width: "20px", textAlign: "center"}}>Akcja</th>
                                             <th style={{width: "18px", textAlign: "center"}}>Zaznacz</th>
@@ -215,13 +220,13 @@ class App extends React.Component {
                                                                           tasks={this.props.tasks}/>
                                                         </td>
                                                         <td style={this.getStyleTaskDate(taskDate, 432000000, 'red', taskStatus, 'realizowane', 'gotowe')}>
-                                                            {taskDate}
+                                                            {this.convertDate(taskDate).slice(0,22)}
                                                         </td>
                                                         <td style={this.getStyleTaskDate(realisationStatusDate, 259200000, 'red', taskStatus, 'gotowe')}>
-                                                            {realisationStatusDate}
+                                                            {this.convertDate(realisationStatusDate).slice(0,22)}
                                                         </td>
                                                         <td>
-                                                            {readyStatusDate}
+                                                            {this.convertDate(readyStatusDate).slice(0,22)}
                                                         </td>
                                                         <td>
                                                             <EditTask taskStatus={taskStatus} taskDate={taskDate}
