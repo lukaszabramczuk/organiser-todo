@@ -127,7 +127,7 @@ class App extends React.Component {
                         boxShadow: "0px 0px 20px lightgrey"
                     }}>
                         <h3 style={{color: "grey"}}> - = ToDo Organiser = -</h3>
-                        <h4 style={{textAlign: "right", color: "grey"}}>Aktualnie realizujesz zadań: {this.counterTasksInRealise()} </h4>
+                        <h4 style={{textAlign: "right", color: "grey"}}>Liczba aktualnie realizowanych zadań: {this.counterTasksInRealise()} </h4>
                     </div>
                     <div style={{
                         border: "1px solid lightgrey",
