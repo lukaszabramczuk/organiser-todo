@@ -96,18 +96,11 @@ class App extends React.Component {
         })
     }
 
-    getStyleRealisationStatusDate = (firstDate, secondDate, diff, color) => {
-        let dateDiff = firstDate -  secondDate
+    getStyleTaskDate = (firstDate, diff, color, status, cancel, cancel2) => {
+        let date = new Date().getTime()
+        let dateDiff = date - firstDate
 
-        return dateDiff > diff ? {color: color} : null
-
-    }
-
-    getStyleTaskDate = (firstDate, diff, color) => {
-        let dateDiff = firstDate +  diff
-
-        return dateDiff > diff ? {color: color} : null
-
+        return status === cancel || status === cancel2 ? null : dateDiff > diff ? {color: color} : null
     }
 
     render() {
@@ -212,10 +205,10 @@ class App extends React.Component {
                                                         <td>
                                                             <StatusButton taskStatus={taskStatus} id={id}/>
                                                         </td>
-                                                        <td style = {this.getStyleTaskDate(taskDate, 1000, 'red' )} >
+                                                        <td style={this.getStyleTaskDate(taskDate, 432000000, 'red', taskStatus, 'realizowane', 'gotowe')}>
                                                             {taskDate}
                                                         </td>
-                                                        <td style = {this.getStyleRealisationStatusDate(realisationStatusDate,taskDate, 259200000, 'red' )} >
+                                                        <td style={this.getStyleTaskDate(realisationStatusDate, 259200000, 'red', taskStatus, 'gotowe')}>
                                                             {realisationStatusDate}
                                                         </td>
                                                         <td>
