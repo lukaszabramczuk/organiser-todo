@@ -203,7 +203,7 @@ class App extends React.Component {
                                                             <EditTask taskStatus={taskStatus} taskDate={taskDate}
                                                                       taskDesc={taskDesc} taskName={taskName} id={id}/>
                                                         </td>
-                                                        <td><Button onClick={() => this.props.deleteTask(id)}
+                                                        <td><Button bsSize="xsmall" onClick={() => this.props.deleteTask(id)}
                                                                     bsStyle="danger">Usuń</Button>
                                                         </td>
                                                         <td style={{textAlign: "center"}}>

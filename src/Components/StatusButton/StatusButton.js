@@ -41,7 +41,7 @@ class StatusButton extends React.Component {
     render() {
 
         return (
-            <Button bsStyle={this.buttonColor()} style={{width: '100px'}} onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
+            <Button bsSize="xsmall" bsStyle={this.buttonColor()} style={{width: '80px'}} onClick={this.handleStatusButton}>{this.state.taskStatus}</Button>
 
         )
     }

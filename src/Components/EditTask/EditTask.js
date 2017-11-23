@@ -67,6 +67,7 @@ class EditTask extends React.Component {
         return (
             <div className="modal-container">
                 <Button
+                    bsSize="xsmall"
                     onClick={() => this.setState({ show: true })}
                 >
                     Edytuj
