@@ -173,7 +173,9 @@ class App extends React.Component {
                                             <th>Nazwa</th>
                                             <th>Opis</th>
                                             <th style={{width: "18px", textAlign: "center"}}>Status</th>
-                                            <th>Data dodania</th>
+                                            <th style={{width: "160px", textAlign: "center"}}>Dodano</th>
+                                            <th style={{width: "160px", textAlign: "center"}}>W realizacji</th>
+                                            <th style={{width: "160px", textAlign: "center"}}>Ukończono</th>
                                             <th style={{width: "20px", textAlign: "center"}}>Edytuj</th>
                                             <th style={{width: "20px", textAlign: "center"}}>Akcja</th>
                                             <th style={{width: "18px", textAlign: "center"}}>Zaznacz</th>
@@ -184,7 +186,7 @@ class App extends React.Component {
                                         {this.props.tasks
                                             .filter((task) => this.state.filter.includes(task.taskStatus))
                                             .map(
-                                                ({id, taskDate, taskName, taskDesc, taskStatus}, index) => (
+                                                ({id, taskDate, taskName, taskDesc, taskStatus, realisationStatusDate, readyStatusDate}, index) => (
                                                     <tr key={id}>
                                                         <td>
                                                             {id}
@@ -200,6 +202,12 @@ class App extends React.Component {
                                                         </td>
                                                         <td>
                                                             {taskDate}
+                                                        </td>
+                                                        <td>
+                                                            {realisationStatusDate}
+                                                        </td>
+                                                        <td>
+                                                            {readyStatusDate}
                                                         </td>
                                                         <td>
                                                             <EditTask taskStatus={taskStatus} taskDate={taskDate}
