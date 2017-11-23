@@ -156,19 +156,20 @@ class App extends React.Component {
                             </form>
                         </div>
                         <br/>
-                        <div style={{textAlign: "right"}}>
-                            <DeleteTaskCheckbox toRemove={this.state.toRemove}/>
-                        </div>
+
                         <div>
                             <ButtonToolbar>
                                 <h4>Filtowanie statusów</h4>
                                 <ToggleButtonGroup onChange={this.filterHandler} type="checkbox"
                                                    defaultValue={["czekające", "realizowane", "gotowe"]}>
-                                    <ToggleButton value={"czekające"}>Czekające</ToggleButton>
-                                    <ToggleButton value={"realizowane"}>Realizowane</ToggleButton>
-                                    <ToggleButton value={"gotowe"}>Gotowe</ToggleButton>
+                                    <ToggleButton bsStyle="default" value={"czekające"}>Czekające</ToggleButton>
+                                    <ToggleButton bsStyle="default" value={"realizowane"}>Realizowane</ToggleButton>
+                                    <ToggleButton bsStyle="default" value={"gotowe"}>Gotowe</ToggleButton>
                                 </ToggleButtonGroup>
                             </ButtonToolbar>
+                            <div style={{textAlign: "right"}}>
+                                <DeleteTaskCheckbox toRemove={this.state.toRemove}/>
+                            </div>
 
                         </div>
                         <br/>
@@ -187,13 +188,13 @@ class App extends React.Component {
                                     }}>
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th style={{width: "5px", textAlign: "center"}}>ID</th>
                                             <th>Nazwa</th>
                                             <th>Opis</th>
                                             <th style={{width: "18px", textAlign: "center"}}>Status</th>
-                                            <th style={{width: "165px", textAlign: "center"}}>Dodano</th>
-                                            <th style={{width: "165px", textAlign: "center"}}>W realizacji</th>
-                                            <th style={{width: "165px", textAlign: "center"}}>Ukończono</th>
+                                            <th style={{width: "125px", textAlign: "center"}}>Dodano</th>
+                                            <th style={{width: "125px", textAlign: "center"}}>W realizacji</th>
+                                            <th style={{width: "125px", textAlign: "center"}}>Ukończono</th>
                                             <th style={{width: "20px", textAlign: "center"}}>Edytuj</th>
                                             <th style={{width: "20px", textAlign: "center"}}>Akcja</th>
                                             <th style={{width: "18px", textAlign: "center"}}>Zaznacz</th>
@@ -220,13 +221,13 @@ class App extends React.Component {
                                                                           tasks={this.props.tasks}/>
                                                         </td>
                                                         <td style={this.getStyleTaskDate(taskDate, 432000000, 'red', taskStatus, 'realizowane', 'gotowe')}>
-                                                            {this.convertDate(taskDate).slice(0,22)}
+                                                            {this.convertDate(taskDate).slice(0,26)}
                                                         </td>
                                                         <td style={this.getStyleTaskDate(realisationStatusDate, 259200000, 'red', taskStatus, 'gotowe')}>
-                                                            {this.convertDate(realisationStatusDate).slice(0,22)}
+                                                            {this.convertDate(realisationStatusDate).slice(0,26)}
                                                         </td>
                                                         <td>
-                                                            {this.convertDate(readyStatusDate).slice(0,22)}
+                                                            {this.convertDate(readyStatusDate).slice(0,26)}
                                                         </td>
                                                         <td>
                                                             <EditTask taskStatus={taskStatus} taskDate={taskDate}

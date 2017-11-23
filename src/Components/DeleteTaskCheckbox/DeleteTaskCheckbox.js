@@ -36,7 +36,7 @@ class DeleteTaskCheckbox extends React.Component {
 
         return (
             <div className="modal-container">
-                <Button onClick={() => this.setState({ show: true })}>Usuń zaznaczone</Button>
+                <Button bsStyle="danger" onClick={() => this.setState({ show: true })}>Usuń zaznaczone</Button>
                 <Modal
                     show={this.state.show}
                     onHide={close}
