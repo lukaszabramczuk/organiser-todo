@@ -3,7 +3,7 @@ import {database} from './../firebase'
 const SET_TASKS = 'tasks/SET_TASKS'
 
 export const init = () => dispatch => {
-    database().ref('taskNames').on('value', snapshot => {
+    database().ref('ListTask').on('value', snapshot => {
             let tasks = snapshot.val()
             dispatch(setTasks(tasks))
         }
@@ -12,14 +12,14 @@ export const init = () => dispatch => {
 
 export const addNewTask = (newTaskData) => (dispatch, getState) => {
     const nextIndex = getState().tasks.tasksList.length || 0
-    database().ref(`taskNames/${nextIndex}`).set({
+    database().ref(`ListTask/${nextIndex}`).set({
         ...newTaskData,
         id: nextIndex
     })
 }
 
 export const deleteTask = (id) => (dispatch, getState) => {
-    database().ref(`taskNames/${id}`).set(null)
+    database().ref(`ListTask/${id}`).set(null)
 }
 
 

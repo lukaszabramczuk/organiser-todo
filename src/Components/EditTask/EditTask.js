@@ -17,7 +17,8 @@ class EditTask extends React.Component {
         show: false,
         taskDesc: this.props.taskDesc,
         taskName: this.props.taskName,
-        taskStatus: this.props.taskStatus
+        taskStatus: this.props.taskStatus,
+        disabled: true
     }
 
     getInitialState() {
@@ -27,14 +28,17 @@ class EditTask extends React.Component {
 
     handleEditedTaskName = (event) => {
         this.setState({
-            taskName: event.target.value
+            taskName: event.target.value,
+            disabled: false
         })
     }
 
     handleEditedTaskDesc = (event) => {
         this.setState({
-            taskDesc: event.target.value
+            taskDesc: event.target.value,
+            disabled: false
         })
+
     }
 
     handleUpdateTask = (event) => {
@@ -101,7 +105,7 @@ class EditTask extends React.Component {
                     </Modal.Body>
                     <Modal.Footer>
                         {/*<Button bsStyle="primary" onClick={this.props.onHide}>Zapisz</Button>*/}
-                        <Button bsStyle="primary" onClick={this.handleUpdateTask}>Zapisz</Button>
+                        <Button bsStyle="primary" onClick={this.handleUpdateTask} disabled={this.state.disabled}>Zapisz</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
