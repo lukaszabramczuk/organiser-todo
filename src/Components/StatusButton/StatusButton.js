@@ -12,36 +12,31 @@ class StatusButton extends React.Component {
         taskStatus: this.props.taskStatus,
         id: this.props.id,
         buttonColor: ''
-    }
+    }  //wyciagniecie stanu z propsów
 
-    handleStatusButton = () => {
-        let path = database().ref(`taskNames/${this.state.id}/taskStatus`)
+    handleStatusButton = () => { //funkcja zmieniająca status, oraz dodająca date po nacisnieciu buttona
+        let path = database().ref(`taskNames/${this.state.id}/taskStatus`) //zadeklarowanie sciezki statusu dla wybranego id
         let status = this.state.taskStatus
 
 
-        status === 'czekające' ? this.setState({taskStatus: 'realizowane'})
-            : status==='realizowane' ? this.setState({taskStatus: 'gotowe'})
-            : this.setState({taskStatus: 'gotowe'});
-
-
-        let pathRealisationStatusDate = database().ref(`taskNames/${this.state.id}/realisationStatusDate`)
-        let pathReadyStatusDate = database().ref(`taskNames/${this.state.id}/readyStatusDate`)
-        let date = new Date()
+        let pathRealisationStatusDate = database().ref(`taskNames/${this.state.id}/realisationStatusDate`) //zadeklarowanie sciezki statusu "realizowane" dla wybranego id
+        let pathReadyStatusDate = database().ref(`taskNames/${this.state.id}/readyStatusDate`)  //zadeklarowanie sciezki statusu "gotowe" dla wybranego id
+        let date = new Date() // przypisanie do zmiennej date aktualnej daty
 
         if (status === 'czekające') {
             path.set('realizowane')
             pathRealisationStatusDate.set(date.getTime())
-            this.setState({taskStatus: 'realizowane'})
+            this.setState({taskStatus: 'realizowane'}) //instrukcja warunkowa dla zmiennej status i ustawienie jej nowego stanu względem aktualnego stringa oraz dodanie aktualnej daty
 
         }
         else if (status === 'realizowane') {
             path.set('gotowe')
             pathReadyStatusDate.set(date.getTime())
-            this.setState({taskStatus: 'gotowe'})
+            this.setState({taskStatus: 'gotowe'}) //instrukcja warunkowa dla zmiennej status i ustawienie jej nowego stanu względem aktualnego stringa oraz dodanie aktualnej daty
         }
     }
 
-    buttonColor = () => {
+    buttonColor = () => {  //funkcja sprawdzająca stan i zmieniajaca kolor buttona wzgledem stanu
         let status = this.state.taskStatus;
         let buttonColor = 'danger'
 

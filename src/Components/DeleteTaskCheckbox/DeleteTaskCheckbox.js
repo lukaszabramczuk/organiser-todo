@@ -17,9 +17,6 @@ class DeleteTaskCheckbox extends React.Component {
 
             }
 
-    getInitialState() {
-        return {show: false};
-    }
 
     removeAll = (event) => {
         event.preventDefault();
