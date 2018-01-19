@@ -32,11 +32,11 @@ class StatusButton extends React.Component {
         else if (status === 'realizowane') {
             path.set('gotowe')
             pathReadyStatusDate.set(date.getTime())
-            this.setState({taskStatus: 'gotowe'}) //instrukcja warunkowa dla zmiennej status i ustawienie jej nowego stanu względem aktualnego stringa oraz dodanie aktualnej daty
+            this.setState({taskStatus: 'gotowe'}) // instrukcja warunkowa dla zmiennej status i ustawienie jej nowego stanu względem aktualnego stringa oraz dodanie aktualnej daty
         }
     }
 
-    buttonColor = () => {  //funkcja sprawdzająca stan i zmieniajaca kolor buttona wzgledem stanu
+    buttonColor = () => {  //funkcja sprawdzająca stan i zmieniajaca kolor buttona wzgledem jego stanu
         let status = this.state.taskStatus;
         let buttonColor = 'danger'
 
